@@ -1,0 +1,18 @@
+{
+  "path_error":"Erro",
+
+
+
+  "tf_user": "E-mail",
+  "title_menu": "Menu",
+  "title_profile" : "Perfil",
+    "title_about" : "Sobre",
+    "confirm_logout": "Deseja mesmo sair?",
+    "yes" : "Sim",
+    "no" : "Não",
+    "close" : "Fechar",
+    "success" : "Sucesso",
+    "error" : "Atenção",
+    "version": "Versão ",
+    "title_logout" : "Sair"
+}
