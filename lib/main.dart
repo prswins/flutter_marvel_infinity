@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_marvel_infinity/app_localizations.dart';
 import 'package:flutter_marvel_infinity/controller/cart_controller.dart';
 import 'package:flutter_marvel_infinity/controller/profile_controller.dart';
+import 'package:flutter_marvel_infinity/navigation_service.dart';
 import 'package:flutter_marvel_infinity/presentation/comics_list_screen.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +13,7 @@ void main() {
   GetIt getIt = GetIt.I;
   getIt.registerSingleton<CartController>(CartController());
   getIt.registerSingleton<ProfileController>(ProfileController());
+  getIt.registerSingleton<NavigationService>(NavigationService());
   runApp(MyApp());
 }
 

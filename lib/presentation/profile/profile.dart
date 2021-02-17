@@ -80,7 +80,7 @@ class _ProfileState extends State<Profile> {
                           title: Text(AppLocalizations.of(context).translate('order_numero') + index.toString()),
                           
                           subtitle: Text(AppLocalizations.of(context).translate('order_total') +
-                              controller.listaPedido[index].total.toString() +
+                              controller.listaPedido[index].total.toStringAsFixed(2).toString() +
                               "\n"+ AppLocalizations.of(context).translate('order_data')+
                               controller.listaPedido[index].data
                                   .toIso8601String())),

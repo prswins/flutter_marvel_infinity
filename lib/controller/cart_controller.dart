@@ -12,10 +12,10 @@ abstract class _CartControllerBase with Store {
   addItemCart(ComicsSummary item) {
   
     ItemCarrinho ic = ItemCarrinho(item);
-    if (itensCarrinho.isEmpty) {
+    if (itensCarrinho.length == 0) {
       ic.qtd = 1;
       itensCarrinho.add(ic);
-    } else {
+    } else if (itensCarrinho.length > 0){
       var retorno = itensCarrinho
           .indexWhere((item) => (item.comicsSummary.id == ic.comicsSummary.id));
       if (retorno == -1) {
@@ -52,11 +52,11 @@ abstract class _CartControllerBase with Store {
 
   @action
   double totalCarrinho() {
-    int total = 0;
+    double total = 0;
     itensCarrinho.forEach((element) {
-      total = total + element.qtd;
+      total = total + (element.qtd * element.comicsSummary.prices[0].price);
     });
-    return (total * 9.99);
+    return (total);
   }
 
   @action

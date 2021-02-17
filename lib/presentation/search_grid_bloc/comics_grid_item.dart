@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_marvel_infinity/comics_summary.dart';
 import 'package:flutter_marvel_infinity/controller/cart_controller.dart';
 import 'package:flutter_marvel_infinity/presentation/cart/cart.dart';
+import 'package:flutter_marvel_infinity/presentation/item_detail.dart/item_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../app_localizations.dart';
+import '../../navigation_service.dart';
 
 class ComicsGridItem extends StatelessWidget {
   final controller = GetIt.I.get<CartController>();
+  final navigation = GetIt.I.get<NavigationService>();
 
   ComicsGridItem({
     @required this.item,
@@ -34,15 +37,26 @@ class ComicsGridItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () => Fluttertoast.showToast(
-            msg:
-                item.description != null ? item.description : AppLocalizations.of(context).translate('store_msg_sem_informacoes'),
-            //toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ItemDetail(
+                              comicsSummary: item,
+                            ),
+                          ));
+                      Fluttertoast.showToast(
+                          msg: item.description != null
+                              ? item.description
+                              : AppLocalizations.of(context)
+                                  .translate('store_msg_sem_informacoes'),
+                          //toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    },
                     child: Text(
                       item.title,
                       style: TextStyle(color: Colors.white),
@@ -51,22 +65,41 @@ class ComicsGridItem extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Fluttertoast.showToast(
-                        msg: AppLocalizations.of(context).translate('store_msg_item_add'),
-                        //toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                    controller.addItemCart(item);
+                    if (item.prices[0].price != 0.0) {
+                      Fluttertoast.showToast(
+                          msg: AppLocalizations.of(context)
+                              .translate('store_msg_item_add'),
+                          //toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+
+                      controller.addItemCart(item);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "indisponivel"
+                          //AppLocalizations.of(context).translate('store_msg_item_add')
+                          ,
+                          //toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    }
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Center(
-                        child: Text("R\$ 9,99",
+                        child: Text(
+                            "R\$ " +
+                                item.prices[0].price
+                                    .toStringAsFixed(2)
+                                    .toString(),
                             style: TextStyle(color: Colors.white)),
                       ),
                       Icon(

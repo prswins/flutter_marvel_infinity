@@ -148,7 +148,7 @@ class _CartState extends State<Cart> {
                   fontWeight: FontWeight.bold),
             ),
             Text(
-              "9,99",
+              comic.comicsSummary.prices[0].price.toStringAsFixed(2).toString(),
               style: TextStyle(
                   //color: Colors.red,
                   fontWeight: FontWeight.bold),
