@@ -29,6 +29,13 @@
   "store_msg_sem_informacoes" : "No information",
   "store_msg_item_add" : "Item added to Cart",
 
+  "detail_titulo" : "Details",
+  "detail_botao_add" : "Add to Cart",
+  "detail_item_indisponivel" : "Item unavailable",
+
+
+
+
   "tf_user": "E-mail",
   "title_menu": "Menu",
     "title_about" : "Sobre",

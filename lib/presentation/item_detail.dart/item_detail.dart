@@ -4,6 +4,8 @@ import 'package:flutter_marvel_infinity/controller/cart_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../app_localizations.dart';
+
 class ItemDetail extends StatefulWidget {
   final ComicsSummary comicsSummary;
   ItemDetail({Key key, @required this.comicsSummary}) : super(key: key);
@@ -25,7 +27,7 @@ class _ItemDetailState extends State<ItemDetail> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Detalhes"),
+        title: Text(AppLocalizations.of(context).translate('detail_titulo')),
         elevation: 4,
       ),
       body: SafeArea(
@@ -70,19 +72,22 @@ class _ItemDetailState extends State<ItemDetail> {
                     color: Colors.white,
                   ),
                 )),
-                Expanded(
-                    child: Text(
-                  widget.comicsSummary.prices[0].price != 0.0
-                      ? "Valor: R\$" +
-                          widget.comicsSummary.prices[0].price.toString()
-                      : "Indisponivel",
-                  style: TextStyle(color: Colors.white, fontSize: 40),
-                )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                      child: Text(
+                    widget.comicsSummary.prices[0].price != 0.0
+                        ? "R\$" +
+                            widget.comicsSummary.prices[0].price.toString()
+                        : AppLocalizations.of(context).translate('detail_item_indisponivel'),
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  )),
+                ),
                 RaisedButton(
                   onPressed: () {
                     if (widget.comicsSummary.prices[0].price == 0.0) {
                       Fluttertoast.showToast(
-                          msg: "Indisponivel",
+                          msg: AppLocalizations.of(context).translate('detail_item_indisponivel'),
                           //toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 1,
@@ -91,7 +96,7 @@ class _ItemDetailState extends State<ItemDetail> {
                           fontSize: 16.0);
                     } else {
                       Fluttertoast.showToast(
-                          msg: "Adicionado ao carrinho",
+                          msg: AppLocalizations.of(context).translate('store_msg_item_add'),
                           //toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 1,
@@ -103,7 +108,16 @@ class _ItemDetailState extends State<ItemDetail> {
                     }
                   },
                   color: Colors.red,
-                  child: Text("Adicionar ao Carrinho"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      
+                      Text(AppLocalizations.of(context).translate('detail_botao_add'),style: TextStyle(
+                        color: Colors.white,
+                      )),
+                      Icon(Icons.shopping_cart_sharp, color: Colors.white,)
+                    ],
+                  ),
                 )
               ],
             ),

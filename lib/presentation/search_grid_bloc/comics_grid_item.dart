@@ -79,7 +79,7 @@ class ComicsGridItem extends StatelessWidget {
                       controller.addItemCart(item);
                     } else {
                       Fluttertoast.showToast(
-                          msg: "indisponivel"
+                          msg: AppLocalizations.of(context).translate('detail_item_indisponivel')
                           //AppLocalizations.of(context).translate('store_msg_item_add')
                           ,
                           //toastLength: Toast.LENGTH_SHORT,
