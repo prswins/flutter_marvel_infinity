@@ -83,7 +83,7 @@ class _ProfileState extends State<Profile> {
                               controller.listaPedido[index].total.toStringAsFixed(2).toString() +
                               "\n"+ AppLocalizations.of(context).translate('order_data')+
                               controller.listaPedido[index].data
-                                  .toIso8601String())),
+                                  .toIso8601String().substring(0,10))),
                     );
                   },
                 )
