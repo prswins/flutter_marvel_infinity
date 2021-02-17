@@ -1,11 +1,36 @@
 {
+  "titulo_loja" : "Comics Store",
   "path_error":"Erro",
 
+  "title_profile" : "Profile",
 
+  "profile_email": "E-mail",
+  "profile_nome": "Name",
+  "profile_cpf": "CPF",
+  "profile_endereco": "Address",
+  "profile_telefone": "Phone",
+
+  "order_titulo": "Orders",
+  "order_numero": "Order: #",
+  "order_total": "Total: R$ ",
+  "order_data": "Date: ",
+
+  "cart_titulo" : "Shopping Cart",
+  "cart_carrinho_vazio" : "The cart is empty",
+  "cart_botao_fechar_pedido" : "Complete order",
+  "cart_botao_msg" : "Order placed",
+  "order_pedidos_vazio": "There are no orders",
+  
+
+  "toolbar_item_perfil":"Profile",
+  "toolbar_item_loja":"Store",
+  "toolbar_item_carrinho":"Cart",
+
+  "store_msg_sem_informacoes" : "No information",
+  "store_msg_item_add" : "Item added to Cart",
 
   "tf_user": "E-mail",
   "title_menu": "Menu",
-  "title_profile" : "Perfil",
     "title_about" : "Sobre",
     "confirm_logout": "Deseja mesmo sair?",
     "yes" : "Sim",

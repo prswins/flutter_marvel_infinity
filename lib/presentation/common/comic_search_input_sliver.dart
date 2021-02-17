@@ -40,13 +40,13 @@ class _CharacterSearchInputSliverState
   }
 
   @override
-  Widget build(BuildContext context) => SliverToBoxAdapter(
+  Widget build(BuildContext context,) => SliverToBoxAdapter(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: TextField(
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search),
-              labelText: 'Entre com Título',
+              labelText: 'Search by title',
             ),
             onChanged: _textChangeStreamController.add,
           ),

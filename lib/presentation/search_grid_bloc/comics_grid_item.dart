@@ -5,6 +5,8 @@ import 'package:flutter_marvel_infinity/presentation/cart/cart.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../app_localizations.dart';
+
 class ComicsGridItem extends StatelessWidget {
   final controller = GetIt.I.get<CartController>();
 
@@ -18,15 +20,6 @@ class ComicsGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         highlightColor: Colors.redAccent,
-        onTap: () => Fluttertoast.showToast(
-            msg:
-                item.description != null ? item.description : 'Sem informações',
-            //toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0),
         child: Card(
           shadowColor: Colors.red,
           margin: EdgeInsets.all(4),
@@ -40,15 +33,26 @@ class ComicsGridItem extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: Text(
-                    item.title,
-                    style: TextStyle(color: Colors.white),
+                  child: InkWell(
+                    onTap: () => Fluttertoast.showToast(
+            msg:
+                item.description != null ? item.description : AppLocalizations.of(context).translate('store_msg_sem_informacoes'),
+            //toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0),
+                    child: Text(
+                      item.title,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
                     Fluttertoast.showToast(
-                        msg: 'Item adicionado ao Carrinho',
+                        msg: AppLocalizations.of(context).translate('store_msg_item_add'),
                         //toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,

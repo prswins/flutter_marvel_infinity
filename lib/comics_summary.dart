@@ -471,3 +471,17 @@ class EnumValues<T> {
         return reverseMap;
     }
 }
+
+class ItemCarrinho {
+  ComicsSummary comicsSummary;
+  int qtd;
+  String valor;
+  ItemCarrinho(this.comicsSummary, {this.qtd, this.valor});
+}
+
+class PedidoFechado {
+  List<ItemCarrinho> itens;
+  double total;
+  DateTime data;
+  PedidoFechado({this.itens, this.total, this.data});
+}

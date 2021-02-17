@@ -1,9 +1,45 @@
 {
+  "titulo_loja" : "Loja dos Quadrinhos",
+
   "path_error":"Erro",
 
-  "tf_user": "E-mail",
-  "title_menu": "Menu",
   "title_profile" : "Perfil",
+
+  "profile_email": "E-mail",
+  "profile_nome": "Nome Completo",
+  "profile_cpf": "CPF",
+  "profile_endereco": "Endereço",
+  "profile_telefone": "Telefone",
+
+  "order_titulo": "Pedidos",
+  "order_numero": "Pedido: #",
+  "order_total": "Total: R$ ",
+  "order_data": "Data: ",
+  "order_pedidos_vazio": "Não existem pedidos",
+
+  "store_msg_sem_informacoes" : "Sem informações",
+  "store_msg_item_add" : "Item adicionado ao Carrinho",
+
+
+
+  "cart_titulo" : "Carrinho de Compras",
+  "cart_carrinho_vazio" : "O carrinho está vazio",
+  "cart_botao_fechar_pedido" : "Completar pedido",
+  "cart_botao_msg" : "Pedido realizado",
+
+
+  "toolbar_item_perfil":"Perfil",
+  "toolbar_item_loja":"Loja",
+  "toolbar_item_carrinho":"Carrinho",
+
+
+
+
+
+
+
+
+  "title_menu": "Menu",
     "title_about" : "Sobre",
     "confirm_logout": "Deseja mesmo sair?",
     "yes" : "Sim",
@@ -13,5 +49,8 @@
     "error" : "Atenção",
     "version": "Versão ",
     "title_logout" : "Sair"
+
+
+
 
 }
