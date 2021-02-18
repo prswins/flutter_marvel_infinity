@@ -32,97 +32,217 @@ class _ItemDetailState extends State<ItemDetail> {
       ),
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border(
-                        left: BorderSide(
-                          color: Colors.red,
-                          width: 2,
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: orientation == Orientation.portrait ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ImageBox(),
+                    Expanded(
+                      flex: 1,
+                      child: Titulo(widget: widget,)),
+                    Expanded(
+                      flex:2,
+                      child: Descricao(widget: widget)),
+                    Valor(widget: widget ),
+                    Botao(widget: widget )
+                  ],
+                ) :Column(
+                  children: [
+                    Expanded(child: Titulo(widget: widget)),
+                    Row(
+                      children: [
+                        ImageBox(),
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8,right: 8),
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    
+                                    Descricao(widget: widget),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                        
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                            children: [
+                              
+                              Valor(widget: widget ),
+                              Botao(widget: widget )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    height: 200,
-                    width: 200,
-                  ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                      child: Text(
-                    widget.comicsSummary.title,
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                ),
-                Expanded(
-                    child: Text(
-                  widget.comicsSummary.description != null
-                      ? widget.comicsSummary.description
-                      : "",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                      child: Text(
-                    widget.comicsSummary.prices[0].price != 0.0
-                        ? "R\$" +
-                            widget.comicsSummary.prices[0].price.toString()
-                        : AppLocalizations.of(context).translate('detail_item_indisponivel'),
-                    style: TextStyle(color: Colors.white, fontSize: 30),
-                  )),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (widget.comicsSummary.prices[0].price == 0.0) {
-                      Fluttertoast.showToast(
-                          msg: AppLocalizations.of(context).translate('detail_item_indisponivel'),
-                          //toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: AppLocalizations.of(context).translate('store_msg_item_add'),
-                          //toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      cartController.addItemCart(widget.comicsSummary);
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      
-                      Text(AppLocalizations.of(context).translate('detail_botao_add'),style: TextStyle(
-                        color: Colors.white,
-                      )),
-                      Icon(Icons.shopping_cart_sharp, color: Colors.white,)
-                    ],
-                  ),
-                )
-              ],
+              );
+            }
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Botao extends StatelessWidget {
+  const Botao({
+    Key key,
+    @required this.widget,
+    
+  }) : super(key: key);
+
+  final ItemDetail widget;
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        if (widget.comicsSummary.prices[0].price == 0.0) {
+          Fluttertoast.showToast(
+              msg: AppLocalizations.of(context).translate('detail_item_indisponivel'),
+              //toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else {
+          Fluttertoast.showToast(
+              msg: AppLocalizations.of(context).translate('store_msg_item_add'),
+              //toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+          cartController.addItemCart(widget.comicsSummary);
+          Navigator.of(context).pop();
+        }
+      },
+      color: Colors.red,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          
+          Text(AppLocalizations.of(context).translate('detail_botao_add'),style: TextStyle(
+            color: Colors.white,
+          )),
+          Icon(Icons.shopping_cart_sharp, color: Colors.white,)
+        ],
+      ),
+    );
+  }
+}
+
+class Valor extends StatelessWidget {
+  const Valor({
+    Key key,
+    @required this.widget,
+    
+  }) : super(key: key);
+
+  final ItemDetail widget;
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Expanded(
+          child: Text(
+        widget.comicsSummary.prices[0].price != 0.0
+            ? "R\$" +
+                widget.comicsSummary.prices[0].price.toString()
+            : AppLocalizations.of(context).translate('detail_item_indisponivel'),
+        style: TextStyle(color: Colors.white, fontSize: 30),
+      )),
+    );
+  }
+}
+
+class Descricao extends StatelessWidget {
+  const Descricao({
+    Key key,
+    
+    @required this.widget,
+  }) : super(key: key);
+
+  final ItemDetail widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      widget.comicsSummary.description != null
+      ? widget.comicsSummary.description
+      : "",
+      style: TextStyle(
+    color: Colors.white,
+      ),
+    );
+  }
+}
+
+class Titulo extends StatelessWidget {
+  const Titulo({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ItemDetail widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child:  Text(
+        widget.comicsSummary.title,
+        style: TextStyle(
+        color: Colors.red,
+        fontSize: 20,
+        fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class ImageBox extends StatelessWidget {
+  const ImageBox({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          border: Border(
+            left: BorderSide(
+              color: Colors.red,
+              width: 2,
             ),
           ),
         ),
+        height: 200,
+        width: 200,
       ),
     );
   }

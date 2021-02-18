@@ -40,29 +40,34 @@ class _ComicsSliverGridState extends State<ComicsSliverGrid> {
   }
 
   @override
-  Widget build(BuildContext context) => CustomScrollView(
-        slivers: <Widget>[
-          ComicSearchInputSliver(
-            onChanged: (searchTerm) => _bloc.onSearchInputChangedSink.add(
-              searchTerm,
-            ),
-          ),
-          PagedSliverGrid<int, ComicsSummary>(
-            pagingController: _pagingController,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 100 / 150,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 3,
-            ),
-            builderDelegate: PagedChildBuilderDelegate<ComicsSummary>(
-              itemBuilder: (context, item, index) => ComicsGridItem(
-                item: item,
+  Widget build(BuildContext context) =>
+      OrientationBuilder(builder: (context, orientation) {
+        return CustomScrollView(
+          slivers: <Widget>[
+            ComicSearchInputSliver(
+              onChanged: (searchTerm) => _bloc.onSearchInputChangedSink.add(
+                searchTerm,
               ),
             ),
-          ),
-        ],
-      );
+            PagedSliverGrid<int, ComicsSummary>(
+              pagingController: _pagingController,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio:
+                    orientation == Orientation.portrait ? 100 / 150 : 100 / 90,
+                    
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: orientation == Orientation.portrait ? 3 : 5,
+              ),
+              builderDelegate: PagedChildBuilderDelegate<ComicsSummary>(
+                itemBuilder: (context, item, index) => ComicsGridItem(
+                  item: item,
+                ),
+              ),
+            ),
+          ],
+        );
+      });
 
   @override
   void dispose() {
