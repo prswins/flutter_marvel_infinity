@@ -32,68 +32,128 @@ class _ItemDetailState extends State<ItemDetail> {
       ),
       body: SafeArea(
         child: Center(
-          child: OrientationBuilder(
-            builder: (context, orientation) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: orientation == Orientation.portrait ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ImageBox(),
-                    Expanded(
-                      flex: 1,
-                      child: Titulo(widget: widget,)),
-                    Expanded(
-                      flex:2,
-                      child: Descricao(widget: widget)),
-                    Valor(widget: widget ),
-                    Botao(widget: widget )
-                  ],
-                ) :Column(
-                  children: [
-                    Expanded(child: Titulo(widget: widget)),
-                    Row(
+          child: OrientationBuilder(builder: (context, orientation) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: orientation == Orientation.portrait
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ImageBox(),
+                        // ImageBox(widget: widget,),
+                        widget.comicsSummary.images.isNotEmpty
+                            ? Image.network(
+                                widget.comicsSummary.images[0].path + ".jpg",
+                                height: 200,
+                                width: 200,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress
+                                                  .expectedTotalBytes !=
+                                              null
+                                          ? loadingProgress
+                                                  .cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes
+                                          : null,
+                                    ),
+                                  );
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  print(context);
+                                  print(error);
+                                  print(stackTrace);
+                                  return Text(error);
+                                },
+                              )
+                            : ImageBox(
+                                widget: widget,
+                              ),
                         Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8,right: 8),
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                            flex: 1,
+                            child: Titulo(
+                              widget: widget,
+                            )),
+                        Expanded(flex: 2, child: Descricao(widget: widget)),
+                        Valor(widget: widget),
+                        Botao(widget: widget)
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Expanded(child: Titulo(widget: widget)),
+                        Row(
+                          children: [
+                            widget.comicsSummary.images.isNotEmpty
+                            ? Image.network(
+                                widget.comicsSummary.images[0].path + ".jpg",
+                                height: 200,
+                                width: 200,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress
+                                                  .expectedTotalBytes !=
+                                              null
+                                          ? loadingProgress
+                                                  .cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes
+                                          : null,
+                                    ),
+                                  );
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  print(context);
+                                  print(error);
+                                  print(stackTrace);
+                                  return Text(error);
+                                },
+                              )
+                            : ImageBox(
+                                widget: widget,
+                              ),
+                            Expanded(
+                              flex: 2,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8, right: 8),
+                                child: ListView(
+                                  shrinkWrap: true,
                                   children: [
-                                    
-                                    Descricao(widget: widget),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Descricao(widget: widget),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-
-                            children: [
-                              
-                              Valor(widget: widget ),
-                              Botao(widget: widget )
-                            ],
-                          ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Valor(widget: widget),
+                                  Botao(widget: widget)
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              );
-            }
-          ),
+            );
+          }),
         ),
       ),
     );
@@ -104,11 +164,9 @@ class Botao extends StatelessWidget {
   const Botao({
     Key key,
     @required this.widget,
-    
   }) : super(key: key);
 
   final ItemDetail widget;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +174,8 @@ class Botao extends StatelessWidget {
       onPressed: () {
         if (widget.comicsSummary.prices[0].price == 0.0) {
           Fluttertoast.showToast(
-              msg: AppLocalizations.of(context).translate('detail_item_indisponivel'),
+              msg: AppLocalizations.of(context)
+                  .translate('detail_item_indisponivel'),
               //toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,
@@ -140,11 +199,14 @@ class Botao extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          
-          Text(AppLocalizations.of(context).translate('detail_botao_add'),style: TextStyle(
+          Text(AppLocalizations.of(context).translate('detail_botao_add'),
+              style: TextStyle(
+                color: Colors.white,
+              )),
+          Icon(
+            Icons.shopping_cart_sharp,
             color: Colors.white,
-          )),
-          Icon(Icons.shopping_cart_sharp, color: Colors.white,)
+          )
         ],
       ),
     );
@@ -155,11 +217,9 @@ class Valor extends StatelessWidget {
   const Valor({
     Key key,
     @required this.widget,
-    
   }) : super(key: key);
 
   final ItemDetail widget;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -168,9 +228,9 @@ class Valor extends StatelessWidget {
       child: Expanded(
           child: Text(
         widget.comicsSummary.prices[0].price != 0.0
-            ? "R\$" +
-                widget.comicsSummary.prices[0].price.toString()
-            : AppLocalizations.of(context).translate('detail_item_indisponivel'),
+            ? "R\$" + widget.comicsSummary.prices[0].price.toString()
+            : AppLocalizations.of(context)
+                .translate('detail_item_indisponivel'),
         style: TextStyle(color: Colors.white, fontSize: 30),
       )),
     );
@@ -180,7 +240,6 @@ class Valor extends StatelessWidget {
 class Descricao extends StatelessWidget {
   const Descricao({
     Key key,
-    
     @required this.widget,
   }) : super(key: key);
 
@@ -190,10 +249,10 @@ class Descricao extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       widget.comicsSummary.description != null
-      ? widget.comicsSummary.description
-      : "",
+          ? widget.comicsSummary.description
+          : "",
       style: TextStyle(
-    color: Colors.white,
+        color: Colors.white,
       ),
     );
   }
@@ -211,12 +270,10 @@ class Titulo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child:  Text(
+      child: Text(
         widget.comicsSummary.title,
         style: TextStyle(
-        color: Colors.red,
-        fontSize: 20,
-        fontWeight: FontWeight.bold),
+            color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -225,7 +282,10 @@ class Titulo extends StatelessWidget {
 class ImageBox extends StatelessWidget {
   const ImageBox({
     Key key,
+    @required this.widget,
   }) : super(key: key);
+
+  final ItemDetail widget;
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +303,21 @@ class ImageBox extends StatelessWidget {
         ),
         height: 200,
         width: 200,
+        child: widget.comicsSummary.images.isNotEmpty
+            ? Image.network(
+                widget.comicsSummary.images[0].path + ".jpg",
+                errorBuilder: (context, error, stackTrace) {
+                  print(context);
+                  print(error);
+
+                  print(stackTrace);
+
+                  return Text("nao tem imagem");
+                },
+              )
+            : SizedBox(
+                height: 0,
+              ),
       ),
     );
   }

@@ -53,11 +53,11 @@ class _ComicsSliverGridState extends State<ComicsSliverGrid> {
               pagingController: _pagingController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio:
-                    orientation == Orientation.portrait ? 100 / 150 : 100 / 90,
+                    orientation == Orientation.portrait ? 150 / 250 : 150 / 250,
                     
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                crossAxisCount: orientation == Orientation.portrait ? 3 : 5,
+                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
               ),
               builderDelegate: PagedChildBuilderDelegate<ComicsSummary>(
                 itemBuilder: (context, item, index) => ComicsGridItem(
