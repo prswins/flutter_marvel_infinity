@@ -6,6 +6,7 @@ import 'package:flutter_marvel_infinity/controller/cart_controller.dart';
 import 'package:flutter_marvel_infinity/controller/profile_controller.dart';
 import 'package:flutter_marvel_infinity/navigation_service.dart';
 import 'package:flutter_marvel_infinity/presentation/comics_list_screen.dart';
+import 'package:flutter_marvel_infinity/routes.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+     // navigatorKey: GetIt.I<NavigationService>().navigatorKey,
+     // onGenerateRoute: Routes.generateRoute,
       supportedLocales: [
         Locale('en', 'US'), Locale('pt', 'BR')],
       localizationsDelegates: [
