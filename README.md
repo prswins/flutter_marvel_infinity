@@ -1,11 +1,15 @@
-# flutter_marvel_infinity
+# Loja de quadrinhos
 
 
 #### Apresentação geral:
-<img src="https://github.com/prswins/flutter_marvel_infinity/blob/quadrinhos_video_01.gif?raw=true" width="500"/>
-<img src="https://github.com/prswins/flutter_marvel_infinity/blob/quadrinhos_video_02.gif?raw=true" width="500"/>
 
-<img src="https://github.com/prswins/flutter_marvel_infinity/blob/quadrinhos_video_03.gif?raw=true" width="500"/>
+Funcionamento |   |
+| ------------ | ------------ |
+| Tratamento itens  | Procedimento de pedido  |
+|  |  |
+| <img src="https://github.com/prswins/flutter_marvel_infinity/blob/master/quadrinhos_video_01.gif?raw=true" width="500"/> | <img src="https://github.com/prswins/flutter_marvel_infinity/blob/master/quadrinhos_video_02.gif?raw=true" width="500"/> |
+
+
 
 
 
@@ -18,9 +22,9 @@ Telas  |   |   |   |
 
 
 
-Loja de quadrinhos
 
-Bibliotecas utilizadas :
+
+## Bibliotecas utilizadas :
 
 API (fonte de dados : Api Marvel)
 - https://developer.marvel.com/documentation/apiresults
