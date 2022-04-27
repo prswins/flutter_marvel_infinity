@@ -47,8 +47,7 @@ class _ApiUrlBuilder {
   static const _apiPublicKey = '2c4a7fc508f666cbbee091bffd5a1ecd';
   static const _apiPrivateKey = '2718076f3bc96260cbde0c16387247b8778e4bbe';
   static String _timestamp = DateTime.now().toIso8601String();
-  static String _hash =
-      generateMd5(_timestamp + "" + _apiPrivateKey + "" + _apiPublicKey);
+  static String _hash = generateMd5(_timestamp + "" + _apiPrivateKey + "" + _apiPublicKey);
 
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();

@@ -9,6 +9,7 @@ import 'package:flutter_marvel_infinity/presentation/comics_list_screen.dart';
 import 'package:flutter_marvel_infinity/routes.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 void main() {
   GetIt getIt = GetIt.I;
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      localeResolutionCallback: Platform.isAndroid
+      localeResolutionCallback: UniversalPlatform.isAndroid
           ? (locale, supportedLocales) {
         // Verifica se o dispositivo tem suporte dos idiomas
         for (var supportedLocale in supportedLocales) {
